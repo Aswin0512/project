@@ -20,3 +20,9 @@ for p in range(2,k+1):
                 M[l]=(4*e*(l-3)*M[l-4]-4*(l-2)*M[l-2]+(l-3)*(l-4)*(l-5)*M[l-6])/(4*g*(l-1))
                 for m in range(length(B[0])+1):
                     for n in range(length(B[0])+1):
+                        if p%2 ==0:
+                            B[m][n]=M[2(m+n)]
+                        else:
+                            B[m][n]=M[2(m+n)+2]
+                    
+
