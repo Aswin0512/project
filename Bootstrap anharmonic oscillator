@@ -1,0 +1,51 @@
+import numpy as np
+k=int(input('Input the value of K:'))
+up=float(input('input upper limit of E:'))
+lw=float(input('input the lower limit of E:'))
+upx=float(input('input the upper limit of x2:'))
+lwx=float(input('input the lower limit of x2:'))
+nx2=int(input('number of points in x2:'))
+ne=int(input('number of points in E:'))
+g=1
+M=[0]*(2*k+1) #an empty list to store the expectation values
+M[0]=1 # normalisation condition
+u= list(np.arange(lw,up,(up-lw)/ne))
+x=list(np.arange(lwx,upx,(upx-lwx)/nx2))
+E=[]
+x2=[]
+for j in u:
+    for f in x:
+        E.append(j)
+        x2.append(f)
+En=[]
+x2n=[]
+for p in range(2,k+1):
+    if p%2 ==0:
+        B=np.zeros((int(p/2+1),int(p/2+1)))
+    else:
+        B=np.zeros((int(((p-1)/2)+1),int(((p-1)/2)+1)))
+    for e in range(len(E)):
+        M[2]=x2[e]
+        for l in range(4,2*k+1,2):
+            M[l]=(4*E[e]*(l-3)*M[l-4]-4*(l-2)*M[l-2]+(l-3)*(l-4)*(l-5)*M[l-6])/(4*g*(l-1))
+            for m in range(len(B[0])):
+                for n in range(len(B[0])):
+                    if p%2 ==0:
+                        B[m][n]=M[2*(m+n)]
+                    else:
+                        B[m][n]=M[2*(m+n)+2]
+        if np.linalg.det(B) > 0:
+            En.append(E[e])
+            x2n.append(M[2])
+    if p>k-3:
+        filename='E,<x^2>'+str(p)+str(up)+'-'+str(lw)+'.txt'
+        file=open(filename,'w')
+        for i in range(len(En)):
+            file.write(str(En[i])+' '+str(x2n[i])+'\n')
+        file.close()    
+    print(len(En))
+    print(len(x2n))
+    E=En
+    x2=x2n
+    En=[]
+    x2n=[]
