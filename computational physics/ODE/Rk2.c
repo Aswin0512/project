@@ -29,17 +29,18 @@ float ra(float yi,float xi){
     return yi1;
 }
 int main(){
-    printf("%2s %10s %5s %4s %7s %7s %4s %4s %4s %4s \n","No","True value","Euler","Heun","Midpoint","Raltson","Er1","Er2","Er3","Er4");
+    printf("%5s %10s %6s %5s %8s %7s %6s %6s %6s %6s \n","x(i+1)","True value","Euler","Heun","Midpoint","Raltson","Er1","Er2","Er3","Er4");
     float xi=0;
     float yi1=1;
     float yi2=1;
     float yi3=1;
     float yi4=1;
     for(int i=0;i<=7;i++){
-        printf("%2d %10.2f %5.2f %4.2f %7.2f %7.2f %4.2f %4.2f %4.2f %4.2f \n",i+1,ys(xi+h),eu(yi1,xi),he(yi2,xi),mi(yi3,xi),ra(yi4,xi),(ys(xi+h)-eu(yi1,xi)),(ys(xi+h)-he(yi2,xi)),-(ys(xi+h)-mi(yi3,xi)),(ys(xi+h)-ra(yi4,xi)));
+        printf("%5.2f  %10.2f %6.2f %5.2f %8.2f %7.2f %6.2f %6.2f %6.2f %6.2f \n",(i+1)*0.5,ys(xi+h),eu(yi1,xi),he(yi2,xi),mi(yi3,xi),ra(yi4,xi),(ys(xi+h)-eu(yi1,xi)),(ys(xi+h)-he(yi2,xi)),-(ys(xi+h)-mi(yi3,xi)),(ys(xi+h)-ra(yi4,xi)));
         yi1=eu(yi1,xi);
         yi2=he(yi2,xi);
         yi3=mi(yi3,xi);
         yi4=ra(yi4,xi);
-        xi=xi+h;}
+        xi=xi+h;
+        }
 }
